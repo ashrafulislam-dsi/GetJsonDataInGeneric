@@ -11,35 +11,44 @@ import org.json.simple.parser.ParseException;
 
 public class Generic {
      public static void main(String[] args) {
-
-    getJsonDataFromFile();
-    
-    	 
+    	 String filePath = "resources/altufaltujson.json";
+    	 getJsonDataFromFile(filePath);
      }
-     public static Object[][] getJsonDataFromFile(){
+     public static Object[][] getJsonDataFromFile(String filePath){
     	 JSONParser parser = new JSONParser();
 
     		try {
 
-    			
-
-    			JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/All InputForTestcases.json"));
+    			JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(filePath));
 
     			System.out.println(jsonArray.size());
     			
+    			
     			Object [][] data = new Object[jsonArray.size()][];
     			
+    			
     			for(int i = 0; i < jsonArray.size(); i++){
+    				int j = 0;
     				System.out.println("\n\n" + "Info for Employee"+ " " + (i+1)+"\n" );
     				JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+    				data[i] = new Object[jsonObject.size()];
     				Iterator<String> keys = (Iterator<String>) jsonObject.keySet().iterator();
     			    while (keys.hasNext()) {
     			        String key = keys.next();
     			        Object value = jsonObject.get(key);
+    			        
     			        System.out.println( key + ":" + value + "" );
+    			        
+    			        data[i][j]= jsonObject.get(value);
+    			        j++;
+    			       
+    			        
     			       
     			    }
     			
+    			 //0,   
+    			    
+    			    
     				
 //    				System.out.println(jsonObject.get("firstName"));
 //    				System.out.println(jsonObject.get("lastName"));
